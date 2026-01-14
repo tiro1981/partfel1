@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIRO Dev | Slider Fix</title>
+    <title>TIRO Dev | Portfolio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -18,7 +18,6 @@
             --border: rgba(255, 255, 255, 0.1);
             --radius: 20px;
         }
-
         [data-theme="light"] {
             --bg: #f4f4f5;
             --panel: #ffffff;
@@ -27,141 +26,87 @@
             --accent: #059669;
             --border: rgba(0, 0, 0, 0.1);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; transition: background 0.3s, border 0.3s, color 0.3s; }
-        
         body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            background-image: linear-gradient(var(--border) 1px, transparent 1px),
-            linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            min-height: 100vh;
+            background-color: var(--bg); color: var(--text); 
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px; min-height: 100vh;
         }
+        /* Video Background */
+        #bg-video {
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
+            z-index: -1; object-fit: cover; filter: brightness(0.4) contrast(1.1) grayscale(0.2);
+        }
+        [data-theme="light"] #bg-video { display: none; }
 
-        /* --- NAVIGATSIYA --- */
+        /* Nav */
         nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(10px); background: rgba(18, 18, 20, 0.8);
+            display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; 
+            position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); background: rgba(18, 18, 20, 0.8);
             border-bottom: 1px solid var(--border);
         }
         [data-theme="light"] nav { background: rgba(255, 255, 255, 0.8); }
-
         .logo { font-weight: 900; letter-spacing: 1px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1.2rem; }
         .logo i { color: var(--accent); }
         .nav-links { display: flex; gap: 15px; }
-        .nav-item {
-            color: var(--text-muted); padding: 8px 12px; 
-            border-radius: 10px; font-size: 1.2rem; cursor: pointer; transition: 0.2s;
-        }
+        .nav-item { color: var(--text-muted); padding: 8px 12px; border-radius: 10px; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
         .nav-item:hover, .nav-item.active { color: var(--accent); background: var(--border); }
 
-        /* --- SAHIFALAR --- */
+        /* Pages */
         .page { display: none; padding: 40px 8%; animation: fadeUp 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- ILOVALAR GRID --- */
-        .app-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
-            gap: 25px 15px; 
-        }
-
-        .app-wrapper {
-            display: flex; flex-direction: column; align-items: center;
-            cursor: pointer;
-        }
-
+        /* App Grid */
+        .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 25px 15px; }
+        .app-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
         .app-card-image-box {
-            width: 100%; aspect-ratio: 1 / 1; background: var(--panel);
-            border-radius: 22px; overflow: hidden; border: 1px solid var(--border);
-            transition: transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 100%; aspect-ratio: 1 / 1; background: var(--panel); border-radius: 22px; 
+            overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .app-wrapper:hover .app-card-image-box { transform: scale(1.05); border-color: var(--accent); }
         .app-logo-full { width: 100%; height: 100%; object-fit: cover; }
-        
-        .app-name-below {
-            margin-top: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text);
-            text-align: center; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
+        .app-name-below { margin-top: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text); text-align: center; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .app-wrapper:hover .app-name-below { color: var(--accent); }
 
-        /* --- MODAL (POPUP) --- */
+        /* Modal */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); backdrop-filter: grayscale(100%) blur(5px); 
             z-index: 2000; justify-content: center; align-items: center;
         }
         .modal-box {
-            background: var(--panel); width: 95%; max-width: 800px; padding: 40px 30px 30px; /* Tepadan joy ochildi */
-            border: 1px solid var(--border); border-radius: var(--radius); position: relative;
-            max-height: 95vh; overflow-y: auto;
+            background: var(--panel); width: 95%; max-width: 800px; padding: 40px 30px 30px;
+            border: 1px solid var(--border); border-radius: var(--radius); position: relative; max-height: 95vh; overflow-y: auto;
         }
-        /* Yopish tugmasi */
-        .close-btn { 
-            position: absolute; top: 15px; right: 20px; 
-            font-size: 2rem; cursor: pointer; color: var(--text-muted); z-index: 20;
-            background: rgba(0,0,0,0.5); padding: 0 10px; border-radius: 50%;
-        }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--text-muted); z-index: 20; background: rgba(0,0,0,0.5); padding: 0 10px; border-radius: 50%; }
         .close-btn:hover { color: #fff; background: #ff4d4d; }
-        
-        /* Swiper Slider */
-        .swiper { 
-            width: 100%; height: 400px; border-radius: 12px; margin-bottom: 25px; 
-            background: #000; border: 1px solid var(--border);
-        }
+        .swiper { width: 100%; height: 400px; border-radius: 12px; margin-bottom: 25px; background: #000; border: 1px solid var(--border); }
         .swiper img { width: 100%; height: 100%; object-fit: contain; }
-        
-        /* --- SLIDER TUGMALARI (YANGILANGAN) --- */
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--accent);
-            background: rgba(0,0,0,0.6); /* Orqa fon */
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            backdrop-filter: blur(4px);
-        }
-        .swiper-button-next:after, .swiper-button-prev:after {
-            font-size: 1.5rem; font-weight: bold;
-        }
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background: var(--accent); color: #000;
-        }
-        
+        .swiper-button-next, .swiper-button-prev { color: var(--accent); background: rgba(0,0,0,0.6); width: 50px; height: 50px; border-radius: 50%; backdrop-filter: blur(4px); }
+        .swiper-button-next:hover, .swiper-button-prev:hover { background: var(--accent); color: #000; }
         .swiper-pagination-bullet { background: #fff; opacity: 0.5; }
         .swiper-pagination-bullet-active { background: var(--accent); opacity: 1; }
-
         .modal-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 30px; }
-        .btn-action {
-            display: block; width: 100%; padding: 15px; text-align: center;
-            background: var(--accent); color: #000; font-weight: 800; text-decoration: none;
-            border-radius: 12px; border: none; cursor: pointer; font-size: 1.1rem;
-        }
+        .btn-action { display: block; width: 100%; padding: 15px; text-align: center; background: var(--accent); color: #000; font-weight: 800; text-decoration: none; border-radius: 12px; border: none; cursor: pointer; font-size: 1.1rem; }
+        .btn-action:hover { opacity: 0.9; }
 
-        /* --- ADMIN PANEL --- */
+        /* Profile & Admin */
         .admin-card { background: var(--panel); padding: 30px; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 20px; }
-        input, textarea { width: 100%; padding: 12px 15px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 10px; outline: none; margin-bottom: 15px; }
-        .app-list-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid var(--border); }
-        .btn-icon { background: none; border: none; cursor: pointer; font-size: 1rem; margin-left: 10px; } .btn-edit { color: var(--accent); } .btn-del { color: #ff4d4d; }
-
-        @media (max-width: 600px) {
-            .app-grid { grid-template-columns: repeat(3, 1fr); }
-            .swiper { height: 250px; }
-            /* Mobilda tugmalarni kichraytirish */
-            .swiper-button-next, .swiper-button-prev { width: 40px; height: 40px; }
-            .swiper-button-next:after, .swiper-button-prev:after { font-size: 1rem; }
-        }
+        @media (max-width: 600px) { .app-grid { grid-template-columns: repeat(3, 1fr); } .swiper { height: 250px; } }
     </style>
 </head>
 <body data-theme="dark">
+
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="storm.mp4" type="video/mp4">
+    </video>
 
     <nav>
         <div class="logo" onclick="switchPage('dasturlar')"><i class="fas fa-cube"></i> TIRO</div>
         <div class="nav-links">
             <div class="nav-item active" onclick="switchPage('dasturlar')"><i class="fas fa-th-large"></i></div>
             <div class="nav-item" onclick="switchPage('about')"><i class="fas fa-user"></i></div>
-            <div class="nav-item" onclick="switchPage('admin-login')"><i class="fas fa-cog"></i></div>
             <div class="nav-item" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></div>
         </div>
     </nav>
@@ -172,60 +117,22 @@
 
     <section id="about" class="page">
         <div style="max-width: 500px; margin: 0 auto; text-align: center;" class="admin-card">
-            <img id="profile-img" src="" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 20px;">
+            <img id="profile-img" src="https://via.placeholder.com/150" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 20px;">
             <h1 id="profile-name">Ism Familiya</h1>
-            <p id="profile-job" style="color: var(--accent); margin: 10px 0; font-weight: bold;">Kasb</p>
-            <p id="profile-bio" style="color: var(--text-muted); line-height: 1.6;"></p>
-        </div>
-    </section>
-
-    <section id="admin-login" class="page">
-        <div style="max-width: 350px; margin: 80px auto; text-align: center;" class="admin-card">
-            <h2 style="margin-bottom: 20px;">Kirish</h2>
-            <input type="text" id="login-user" placeholder="Login">
-            <input type="password" id="login-pass" placeholder="Parol">
-            <button class="btn-action" onclick="checkLogin()">KIRISH</button>
-        </div>
-    </section>
-
-    <section id="admin-panel" class="page">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <div class="admin-card">
-                <h3>Profilni Tahrirlash</h3>
-                <input type="text" id="inp-name" placeholder="Ism">
-                <input type="text" id="inp-job" placeholder="Kasb">
-                <textarea id="inp-bio" placeholder="Bio"></textarea>
-                <input type="file" id="inp-img">
-                <button class="btn-action" onclick="saveProfile()">SAQLASH</button>
-            </div>
-            <div class="admin-card">
-                <h3 id="form-title">Yangi Ilova</h3>
-                <input type="hidden" id="edit-id">
-                <input type="text" id="app-name" placeholder="Nomi">
-                <input type="text" id="app-link" placeholder="Havola">
-                <textarea id="app-desc" placeholder="Tavsif" rows="4"></textarea>
-                <label style="font-size: 0.8rem; color: var(--text-muted);">Logotip (Asosiy)</label>
-                <input type="file" id="app-logo">
-                <label style="font-size: 0.8rem; color: var(--accent); margin-top:10px; display:block;">Slider Rasmlari (2+ rasm tanlang)</label>
-                <input type="file" id="app-screens" multiple>
-                <button class="btn-action" onclick="saveApp()">SAQLASH</button>
-                <button class="btn-action" onclick="resetForm()" style="background: #333; color: #fff; margin-top: 10px; display: none;" id="cancel-btn">BEKOR QILISH</button>
-            </div>
-            <div class="admin-card"><h3>Boshqaruv</h3><div id="admin-list"></div></div>
+            <p id="profile-job" style="color: var(--accent); margin: 10px 0; font-weight: bold;">Web Dasturchi</p>
+            <p id="profile-bio" style="color: var(--text-muted); line-height: 1.6;">Men haqimda ma'lumot shu yerda bo'ladi.</p>
         </div>
     </section>
 
     <div class="modal-overlay" id="modal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper" id="modal-slider"></div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
             </div>
-
             <div class="modal-desc" id="modal-desc"></div>
             <a id="modal-link" href="#" target="_blank" class="btn-action">OCHISH</a>
         </div>
@@ -233,23 +140,56 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        const toBase64 = file => new Promise((resolve, reject) => { const r = new FileReader(); r.readAsDataURL(file); r.onload = () => resolve(r.result); r.onerror = e => reject(e); });
-        function toggleTheme() {
-            const body = document.body; const icon = document.getElementById('theme-icon');
-            if(body.getAttribute('data-theme') === 'dark') { body.setAttribute('data-theme', 'light'); icon.className = 'fas fa-sun'; } else { body.setAttribute('data-theme', 'dark'); icon.className = 'fas fa-moon'; }
-        }
-        function switchPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active')); event.currentTarget.classList.add('active');
-            if(id === 'dasturlar') renderApps(); if(id === 'about') loadProfile();
-        }
-        function checkLogin() {
-            if(document.getElementById('login-user').value === 'tiro' && document.getElementById('login-pass').value === '0000') { switchPage('admin-panel'); renderAdminList(); } else alert("Xato!");
-        }
+        // -------------------------------------------------------------
+        // DIQQAT: MA'LUMOTLARNI SHU YERGA YOZING (ADMIN PANEL O'RNIGA)
+        // -------------------------------------------------------------
+        
+        // 1. PROFIL MA'LUMOTLARI
+        const myProfile = {
+            name: "TIRO Dev",
+            job: "Full Stack Developer",
+            bio: "Men zamonaviy veb-saytlar va ilovalar yarataman. Quyida mening ishlarim bilan tanishishingiz mumkin.",
+            img: "https://avatars.githubusercontent.com/u/1?v=4" // O'zingizning rasmingiz URL manzilini qo'ying
+        };
 
-        function renderApps() {
-            const apps = JSON.parse(localStorage.getItem('tiro_apps')) || [];
-            document.getElementById('app-container').innerHTML = apps.map((app, i) => `
+        // 2. ILOVALAR RO'YXATI
+        const myApps = [
+            {
+                name: "Discord Bot",
+                link: "https://discord.com",
+                desc: "Bu Discord uchun maxsus yozilgan bot. U serverni boshqarishda yordam beradi.",
+                logo: "https://assets-global.website-files.com/6257adef93867e56f84d3092/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png", // Logotip rasmi
+                screens: [
+                    "https://assets-global.website-files.com/6257adef93867e56f84d3092/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png",
+                    "https://img.freepik.com/free-vector/gradient-ui-ux-elements-background_23-2149056159.jpg"
+                ]
+            },
+            {
+                name: "Telegram Bot",
+                link: "https://telegram.org",
+                desc: "Telegram uchun avtomatlashtirilgan yordamchi bot.",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png",
+                screens: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png"
+                ]
+            }
+            // Yana ilova qo'shish uchun yuqoridagi { ... } blokdan nusxa olib vergul bilan davom ettiring
+        ];
+
+        // -------------------------------------------------------------
+        // KODNING QOLGAN QISMI (O'ZGARTIRISH SHART EMAS)
+        // -------------------------------------------------------------
+
+        function initData() {
+            // Profilni yuklash
+            document.getElementById('profile-name').innerText = myProfile.name;
+            document.getElementById('profile-job').innerText = myProfile.job;
+            document.getElementById('profile-bio').innerText = myProfile.bio;
+            if(myProfile.img) document.getElementById('profile-img').src = myProfile.img;
+
+            // Ilovalarni yuklash
+            const container = document.getElementById('app-container');
+            container.innerHTML = myApps.map((app, i) => `
                 <div class="app-wrapper" onclick="openModal(${i})">
                     <div class="app-card-image-box">
                         <img src="${app.logo}" class="app-logo-full">
@@ -259,77 +199,38 @@
             `).join('');
         }
 
-        // --- YANGILANGAN OPEN MODAL ---
+        function toggleTheme() {
+            const body = document.body; const icon = document.getElementById('theme-icon');
+            if(body.getAttribute('data-theme') === 'dark') { body.setAttribute('data-theme', 'light'); icon.className = 'fas fa-sun'; } 
+            else { body.setAttribute('data-theme', 'dark'); icon.className = 'fas fa-moon'; }
+        }
+
+        function switchPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); 
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active')); 
+            event.currentTarget.classList.add('active');
+        }
+
         function openModal(i) {
-            const app = JSON.parse(localStorage.getItem('tiro_apps'))[i];
+            const app = myApps[i];
             document.getElementById('modal-desc').innerText = app.desc; 
             document.getElementById('modal-link').href = app.link;
             
-            // Slider rasmlari
             const sliderContainer = document.getElementById('modal-slider');
-            if(app.screens && app.screens.length > 0) {
-                sliderContainer.innerHTML = app.screens.map(img => `
-                    <div class="swiper-slide"><img src="${img}"></div>
-                `).join('');
-            } else {
-                // Agar skrinshotlar bo'lmasa, logotipni o'zini qo'yamiz
-                sliderContainer.innerHTML = `<div class="swiper-slide"><img src="${app.logo}"></div>`;
-            }
-
-            document.getElementById('modal').style.display = 'flex';
+            sliderContainer.innerHTML = app.screens.map(img => `<div class="swiper-slide"><img src="${img}"></div>`).join('');
             
-            // Swiperni ishga tushirish (Navigatsiya + Klaviatura bilan)
+            document.getElementById('modal').style.display = 'flex';
             new Swiper(".mySwiper", { 
-                loop: app.screens && app.screens.length > 1, // Faqat 1 tadan ko'p bo'lsa aylanadi
-                keyboard: { enabled: true }, // Klaviaturada boshqarish
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
+                loop: app.screens.length > 1, 
+                navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+                pagination: { el: ".swiper-pagination", clickable: true },
             });
         }
 
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
         
-        // Admin funksiyalari
-        async function saveProfile() {
-            const f = document.getElementById('inp-img').files[0]; let current = JSON.parse(localStorage.getItem('tiro_dev')) || {}; let img = current.img || ""; if(f) img = await toBase64(f);
-            localStorage.setItem('tiro_dev', JSON.stringify({ name: document.getElementById('inp-name').value, job: document.getElementById('inp-job').value, bio: document.getElementById('inp-bio').value, img })); alert("Saqlandi!");
-        }
-        function loadProfile() {
-            const d = JSON.parse(localStorage.getItem('tiro_dev')); if(d) { document.getElementById('profile-name').innerText = d.name; document.getElementById('profile-job').innerText = d.job; document.getElementById('profile-bio').innerText = d.bio; if(d.img) document.getElementById('profile-img').src = d.img; }
-        }
-        async function saveApp() {
-            const id = document.getElementById('edit-id').value; const logoFile = document.getElementById('app-logo').files[0]; const screenFiles = document.getElementById('app-screens').files; let apps = JSON.parse(localStorage.getItem('tiro_apps')) || [];
-            let newApp = { name: document.getElementById('app-name').value, link: document.getElementById('app-link').value, desc: document.getElementById('app-desc').value, logo: "", screens: [] };
-            
-            if(id) { 
-                const idx = apps.findIndex(a => a.id == id); newApp.id = id; 
-                newApp.logo = logoFile ? await toBase64(logoFile) : apps[idx].logo; 
-                newApp.screens = screenFiles.length > 0 ? await Promise.all([...screenFiles].map(toBase64)) : apps[idx].screens; 
-                apps[idx] = newApp; 
-            } else { 
-                newApp.id = Date.now(); 
-                newApp.logo = await toBase64(logoFile); 
-                newApp.screens = await Promise.all([...screenFiles].map(toBase64)); 
-                apps.push(newApp); 
-            }
-            localStorage.setItem('tiro_apps', JSON.stringify(apps)); alert("Saqlandi!"); resetForm(); renderAdminList();
-        }
-        function renderAdminList() {
-            const apps = JSON.parse(localStorage.getItem('tiro_apps')) || [];
-            document.getElementById('admin-list').innerHTML = apps.map(app => `
-                <div class="app-list-item"><span>${app.name}</span><div><button class="btn-icon btn-edit" onclick="editApp(${app.id})"><i class="fas fa-edit"></i></button><button class="btn-icon btn-del" onclick="deleteApp(${app.id})"><i class="fas fa-trash"></i></button></div></div>
-            `).join('');
-        }
-        function deleteApp(id) { if(confirm("O'chirilsinmi?")) { let apps = JSON.parse(localStorage.getItem('tiro_apps')).filter(a => a.id != id); localStorage.setItem('tiro_apps', JSON.stringify(apps)); renderAdminList(); } }
-        function editApp(id) { const app = JSON.parse(localStorage.getItem('tiro_apps')).find(a => a.id == id); document.getElementById('edit-id').value = app.id; document.getElementById('app-name').value = app.name; document.getElementById('app-link').value = app.link; document.getElementById('app-desc').value = app.desc; document.getElementById('form-title').innerHTML = 'Tahrirlash'; document.getElementById('cancel-btn').style.display = 'inline-block'; window.scrollTo(0,0); }
-        function resetForm() { document.getElementById('edit-id').value = ""; document.getElementById('app-name').value = ""; document.getElementById('app-link').value = ""; document.getElementById('app-desc').value = ""; document.getElementById('app-logo').value = ""; document.getElementById('app-screens').value = ""; document.getElementById('form-title').innerHTML = 'Yangi Ilova'; document.getElementById('cancel-btn').style.display = 'none'; }
-        window.onload = () => { renderApps(); loadProfile(); }
+        window.onload = initData;
     </script>
 </body>
 </html>
