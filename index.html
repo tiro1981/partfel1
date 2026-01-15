@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TIRO Dev | Compact Portfolio</title>
+    <title>TIRO Dev | Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -27,7 +27,7 @@
             --surface: #ffffff;
             --text-main: #000000;
             --text-muted: #666666;
-            --accent: #007aff; /* Blue for Light mode */
+            --accent: #007aff;
             --border: rgba(0, 0, 0, 0.1);
             --btn-bg: rgba(0, 0, 0, 0.05);
         }
@@ -37,12 +37,11 @@
         body { 
             background-color: var(--bg);
             color: var(--text-main);
-            /* Orqa fon: Spotlight effekti */
             background-image: radial-gradient(circle at top center, rgba(255,255,255,0.03) 0%, transparent 60%);
             min-height: 100vh;
         }
 
-        /* --- TEPADAGI MENU (TOP BAR) --- */
+        /* --- TEPADAGI MENU --- */
         .top-bar {
             padding: 15px 20px;
             display: flex; align-items: center; justify-content: space-between;
@@ -54,22 +53,12 @@
         .brand-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.5px; }
         .brand-logo span { color: var(--accent); }
 
-        /* O'ng burchakdagi menyular bloki */
-        .top-menu {
-            display: flex; gap: 8px;
-        }
+        .top-menu { display: flex; gap: 8px; }
 
         .menu-btn {
-            background: var(--btn-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            padding: 8px 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.2s;
+            background: var(--btn-bg); color: var(--text-main); border: 1px solid var(--border);
+            padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.85rem;
+            font-weight: 600; display: flex; align-items: center; justify-content: center; transition: 0.2s;
         }
         .menu-btn:active { transform: scale(0.95); }
         .menu-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
@@ -80,14 +69,8 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 1. ILOVALAR GRIDI (Kichraytirilgan) --- */
-        .app-grid { 
-            display: grid; 
-            /* 4 ta ustun = 2 baravar kichik */
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 10px; 
-        }
-        /* Juda kichik ekranlar uchun 3 ta */
+        /* --- GRID --- */
+        .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
         @media (max-width: 360px) { .app-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .app-card {
@@ -98,18 +81,11 @@
         }
         .app-card:active { opacity: 0.7; }
 
-        /* Kichik logotip */
-        .app-icon-box {
-            width: 100%; aspect-ratio: 1/1; border-radius: 10px; 
-            overflow: hidden; margin-bottom: 6px; background: #000;
-        }
+        .app-icon-box { width: 100%; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; margin-bottom: 6px; background: #000; }
         .app-icon { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Kichik matnlar */
         .app-title { font-size: 0.7rem; font-weight: 600; line-height: 1.1; color: var(--text-main); margin-bottom: 2px; }
-        .app-cat { font-size: 0.55rem; color: var(--text-muted); display: none; } /* Joy yetmasa yashiramiz */
 
-        /* --- 2. MEN HAQIMDA --- */
+        /* --- PROFILE --- */
         .profile-header {
             text-align: center; background: var(--surface);
             padding: 30px 20px; border-radius: 20px; border: 1px solid var(--border);
@@ -125,7 +101,7 @@
             color: var(--text-main); text-decoration: none; font-size: 1.2rem;
         }
 
-        /* --- FULLSCREEN MODAL --- */
+        /* --- MODAL --- */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg); z-index: 2000; overflow-y: auto;
@@ -149,14 +125,14 @@
             background: rgba(11, 244, 133, 0.1); color: var(--accent);
             border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(11, 244, 133, 0.3);
         }
-        .app-detail-desc { color: var(--text-muted); line-height: 1.5; margin: 20px 0; font-size: 0.9rem; }
+        .app-detail-desc { color: var(--text-muted); line-height: 1.5; margin: 20px 0; font-size: 0.9rem; white-space: pre-wrap; }
         
         .btn-download {
             display: block; width: 100%; padding: 15px; text-align: center;
             background: var(--accent); color: #fff; border-radius: 12px;
             font-weight: 700; text-decoration: none;
         }
-        [data-theme="light"] .btn-download { color: #fff; } /* Light modeda yozuv oq qolsin */
+        [data-theme="light"] .btn-download { color: #fff; }
         [data-theme="dark"] .btn-download { color: #000; }
 
     </style>
@@ -165,17 +141,10 @@
 
     <div class="top-bar">
         <div class="brand-logo">TIRO <span>Dev</span></div>
-        
         <div class="top-menu">
-            <div class="menu-btn active" id="btn-apps" onclick="switchTab('page-apps', this)">
-                <i class="fas fa-th"></i>
-            </div>
-            <div class="menu-btn" id="btn-profile" onclick="switchTab('page-profile', this)">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="menu-btn" onclick="toggleTheme()">
-                <i class="fas fa-moon" id="theme-icon"></i>
-            </div>
+            <div class="menu-btn active" id="btn-apps" onclick="switchTab('page-apps', this)"><i class="fas fa-th"></i></div>
+            <div class="menu-btn" id="btn-profile" onclick="switchTab('page-profile', this)"><i class="fas fa-user"></i></div>
+            <div class="menu-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></div>
         </div>
     </div>
 
@@ -188,7 +157,7 @@
             <img id="my-avatar" src="" class="avatar">
             <h2 id="my-name">...</h2>
             <p id="my-job" style="color:var(--accent); font-weight:600; font-size:0.9rem; margin-top:5px;">...</p>
-            <p id="my-bio" style="color:var(--text-muted); margin-top:10px; font-size:0.9rem;">...</p>
+            <p id="my-bio" style="color:var(--text-muted); margin-top:10px; font-size:0.9rem; white-space: pre-wrap;">...</p>
             
             <div class="social-links">
                 <a href="#" class="social-btn"><i class="fab fa-telegram"></i></a>
@@ -200,9 +169,7 @@
 
     <div class="modal-overlay" id="full-modal">
         <div class="modal-header">
-            <div class="close-circle" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </div>
+            <div class="close-circle" onclick="closeModal()"><i class="fas fa-times"></i></div>
         </div>
         <div class="modal-body">
             <div class="swiper mySwiper">
@@ -218,15 +185,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // --- MA'LUMOTLAR ---
         const DATA = {
             profile: {
                 name: "Abdurasulov Hikmatillo",
                 job: "Flutter Developer",
-                bio: "  Flutter Developer | AI Engineer Mobil ilovalar, Telegram botlar, Web App va zamonaviy web-saytlar yaratish. AI texnologiyalari yordamida avtomatlashtirilgan va samarali yechimlar
+                // TUZATILDI: Ko'p qatorli matn uchun backticks (`) ishlatildi
+                bio: `Flutter Developer | AI Engineer
 
-"Flutter Developer | AI Engineer I develop mobile applications, Telegram bots, web apps, and modern websites. Using AI technologies, I build automated and efficient solutions.  ",
-                img: "img/avatar.jpg"
+Mobil ilovalar, Telegram botlar, Web App va zamonaviy web-saytlar yaratish.
+AI texnologiyalari yordamida avtomatlashtirilgan va samarali yechimlar.
+
+I develop mobile applications, Telegram bots, web apps, and modern websites. Using AI technologies, I build automated and efficient solutions.`,
+                img: "img/avatar.jpg" // img papkasida avatar.jpg borligiga ishonch hosil qiling
             },
             apps: [
                 {
@@ -239,8 +209,7 @@
                         "img/rasim4.png",
                         "img/rasim5.png",
                         "img/rasim6.png"
-                
-                             ],
+                    ],
                     tech: ["html", "style.css"],
                     desc: "Ulash uchun relax ovozlar tabiat bilan birga uxlang.",
                     link: "https://t.me/tungi_ovozbot"
@@ -250,30 +219,25 @@
                     logo:"img/zikrlogo.jpg",
                     screens:[
                         "img/zikr1.jpg",
-                          "img/zikr2.jpg",
-                          "img/zikr3.jpg",
-                          "img/zikr4.jpg",
-                         
-                        ],
+                        "img/zikr2.jpg",
+                        "img/zikr3.jpg",
+                        "img/zikr4.jpg"
+                    ],
                     tech: ["html", "stayle.css"],
-                    desc: "Zikir aytish va tasbih sifatida ishlatishingiz mumkin aytilgan zikirlar va istiqforlarni hisoblab boradi ",
+                    desc: "Zikir aytish va tasbih sifatida ishlatishingiz mumkin aytilgan zikirlar va istiqforlarni hisoblab boradi",
                     link: "https://t.me/yaxshiammalbot"
-                },
-              
+                }
             ]
         };
 
-        // --- INIT ---
         function init() {
-            // Profil
             document.getElementById('my-name').innerText = DATA.profile.name;
             document.getElementById('my-job').innerText = DATA.profile.job;
             document.getElementById('my-bio').innerText = DATA.profile.bio;
             const imgEl = document.getElementById('my-avatar');
             imgEl.src = DATA.profile.img;
-            imgEl.onerror = () => imgEl.src = "https://ui-avatars.com/api/?name=TD&background=random";
+            imgEl.onerror = () => imgEl.src = "https://ui-avatars.com/api/?name=AH&background=random";
 
-            // Ilovalar (Kichik Grid)
             const container = document.getElementById('app-container');
             container.innerHTML = DATA.apps.map((app, i) => `
                 <div class="app-card" onclick="openModal(${i})">
@@ -285,12 +249,9 @@
             `).join('');
         }
 
-        // --- FUNKSIYALAR ---
         function switchTab(pageId, btn) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
-            // Tugmalar aktivligini o'zgartirish
             document.getElementById('btn-apps').classList.remove('active');
             document.getElementById('btn-profile').classList.remove('active');
             btn.classList.add('active');
@@ -300,11 +261,9 @@
             const body = document.body;
             const icon = document.getElementById('theme-icon');
             if (body.getAttribute('data-theme') === 'light') {
-                body.removeAttribute('data-theme'); // Dark (Default)
-                icon.className = 'fas fa-moon';
+                body.removeAttribute('data-theme'); icon.className = 'fas fa-moon';
             } else {
-                body.setAttribute('data-theme', 'light');
-                icon.className = 'fas fa-sun';
+                body.setAttribute('data-theme', 'light'); icon.className = 'fas fa-sun';
             }
         }
 
@@ -326,7 +285,6 @@
 
             document.getElementById('full-modal').style.display = 'block';
             document.body.style.overflow = 'hidden';
-
             new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", clickable: true } });
         }
 
