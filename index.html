@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TIRO Dev | Portfolio</title>
+    <title>TIRO Dev | Compact Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,17 +11,15 @@
     
     <style>
         :root {
-            /* DARK MODE (Default) */
             --bg: #050505;
             --surface: #121212;
             --text-main: #ffffff;
             --text-muted: #888888;
-            --accent: #0bf485; /* Neon Green */
+            --accent: #0bf485;
             --border: rgba(255, 255, 255, 0.15);
             --btn-bg: rgba(255, 255, 255, 0.1);
         }
 
-        /* LIGHT MODE */
         [data-theme="light"] {
             --bg: #f2f2f7;
             --surface: #ffffff;
@@ -41,7 +39,7 @@
             min-height: 100vh;
         }
 
-        /* --- TEPADAGI MENU --- */
+        /* Tepa menyu */
         .top-bar {
             padding: 15px 20px;
             display: flex; align-items: center; justify-content: space-between;
@@ -49,12 +47,9 @@
             background: rgba(var(--bg), 0.8); backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
         }
-
         .brand-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.5px; }
         .brand-logo span { color: var(--accent); }
-
         .top-menu { display: flex; gap: 8px; }
-
         .menu-btn {
             background: var(--btn-bg); color: var(--text-main); border: 1px solid var(--border);
             padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.85rem;
@@ -64,12 +59,12 @@
         .menu-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
         .menu-btn i { font-size: 1rem; }
 
-        /* --- SAHIFALAR --- */
+        /* Sahifalar */
         .page { display: none; padding: 20px; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- GRID --- */
+        /* Ilovalar */
         .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
         @media (max-width: 360px) { .app-grid { grid-template-columns: repeat(3, 1fr); } }
 
@@ -80,12 +75,11 @@
             cursor: pointer; overflow: hidden;
         }
         .app-card:active { opacity: 0.7; }
-
         .app-icon-box { width: 100%; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; margin-bottom: 6px; background: #000; }
         .app-icon { width: 100%; height: 100%; object-fit: cover; }
         .app-title { font-size: 0.7rem; font-weight: 600; line-height: 1.1; color: var(--text-main); margin-bottom: 2px; }
 
-        /* --- PROFILE --- */
+        /* Profil */
         .profile-header {
             text-align: center; background: var(--surface);
             padding: 30px 20px; border-radius: 20px; border: 1px solid var(--border);
@@ -98,10 +92,11 @@
         .social-btn {
             width: 40px; height: 40px; border-radius: 10px;
             background: var(--btn-bg); display: flex; align-items: center; justify-content: center;
-            color: var(--text-main); text-decoration: none; font-size: 1.2rem;
+            color: var(--text-main); text-decoration: none; font-size: 1.2rem; transition: 0.2s;
         }
+        .social-btn:hover { background: var(--accent); color: #000; }
 
-        /* --- MODAL --- */
+        /* Modal */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg); z-index: 2000; overflow-y: auto;
@@ -118,7 +113,6 @@
         .modal-body { padding: 0 20px 40px; }
         .swiper { width: 100%; height: 300px; border-radius: 15px; background: #000; margin-bottom: 20px; border: 1px solid var(--border); }
         .swiper-slide img { width: 100%; height: 100%; object-fit: contain; }
-        
         .app-detail-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
         .tech-tag { 
             display: inline-block; padding: 4px 8px; margin: 0 5px 5px 0;
@@ -126,7 +120,6 @@
             border-radius: 6px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(11, 244, 133, 0.3);
         }
         .app-detail-desc { color: var(--text-muted); line-height: 1.5; margin: 20px 0; font-size: 0.9rem; white-space: pre-wrap; }
-        
         .btn-download {
             display: block; width: 100%; padding: 15px; text-align: center;
             background: var(--accent); color: #fff; border-radius: 12px;
@@ -134,7 +127,6 @@
         }
         [data-theme="light"] .btn-download { color: #fff; }
         [data-theme="dark"] .btn-download { color: #000; }
-
     </style>
 </head>
 <body>
@@ -160,9 +152,9 @@
             <p id="my-bio" style="color:var(--text-muted); margin-top:10px; font-size:0.9rem; white-space: pre-wrap;">...</p>
             
             <div class="social-links">
-                <a href="#" class="social-btn"><i class="fab fa-telegram"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="#" id="link-tg" class="social-btn" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="#" id="link-insta" class="social-btn" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="link-git" class="social-btn" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </div>
     </div>
@@ -189,18 +181,18 @@
             profile: {
                 name: "Abdurasulov Hikmatillo",
                 job: "Flutter Developer",
-                // TUZATILDI: Ko'p qatorli matn uchun backticks (`) ishlatildi
                 bio: `Flutter Developer | AI Engineer
 
 Mobil ilovalar, Telegram botlar, Web App va zamonaviy web-saytlar yaratish.
 AI texnologiyalari yordamida avtomatlashtirilgan va samarali yechimlar.
 
 I develop mobile applications, Telegram bots, web apps, and modern websites. Using AI technologies, I build automated and efficient solutions.`,
-                img: "img/avatar.jpg" // img papkasida avatar.jpg borligiga ishonch hosil qiling
+                img: "img/avatar.jpg", // <--- TUZATILDI: Vergul qo'yildi
+                
                 socials: {
-                    telegram: "https://t.me/tirlvl", // O'zgartiring!
-                    instagram: "https://instagram.com/egolvl", // O'zgartiring!
-                    github: "https://github.com/tiro1981" // O'zgartiring!
+                    telegram: "https://t.me/tirlvl",
+                    instagram: "https://instagram.com/egolvl",
+                    github: "https://github.com/tiro1981"
                 }
             },
             apps: [
@@ -213,7 +205,7 @@ I develop mobile applications, Telegram bots, web apps, and modern websites. Usi
                         "img/rasim3.png",
                         "img/rasim4.png",
                         "img/rasim5.png",
-                       
+                        "img/rasim6.png"
                     ],
                     tech: ["html", "style.css"],
                     desc: "Ulash uchun relax ovozlar tabiat bilan birga uxlang.",
@@ -221,14 +213,14 @@ I develop mobile applications, Telegram bots, web apps, and modern websites. Usi
                 },
                 {
                     name: "YAXSHI AMMAL",
-                    logo:"img/zikrlogo.jpg",
-                    screens:[
+                    logo: "img/zikrlogo.jpg",
+                    screens: [
                         "img/zikr1.jpg",
                         "img/zikr2.jpg",
                         "img/zikr3.jpg",
                         "img/zikr4.jpg"
                     ],
-                    tech: ["html", "stayle.css"],
+                    tech: ["html", "style.css"],
                     desc: "Zikir aytish va tasbih sifatida ishlatishingiz mumkin aytilgan zikirlar va istiqforlarni hisoblab boradi",
                     link: "https://t.me/yaxshiammalbot"
                 }
@@ -236,13 +228,21 @@ I develop mobile applications, Telegram bots, web apps, and modern websites. Usi
         };
 
         function init() {
+            // Profil ma'lumotlarini yuklash
             document.getElementById('my-name').innerText = DATA.profile.name;
             document.getElementById('my-job').innerText = DATA.profile.job;
             document.getElementById('my-bio').innerText = DATA.profile.bio;
+            
             const imgEl = document.getElementById('my-avatar');
             imgEl.src = DATA.profile.img;
             imgEl.onerror = () => imgEl.src = "https://ui-avatars.com/api/?name=AH&background=random";
 
+            // Ijtimoiy tarmoq linklarini ulash
+            document.getElementById('link-tg').href = DATA.profile.socials.telegram;
+            document.getElementById('link-insta').href = DATA.profile.socials.instagram;
+            document.getElementById('link-git').href = DATA.profile.socials.github;
+
+            // Ilovalarni chizish
             const container = document.getElementById('app-container');
             container.innerHTML = DATA.apps.map((app, i) => `
                 <div class="app-card" onclick="openModal(${i})">
@@ -257,6 +257,7 @@ I develop mobile applications, Telegram bots, web apps, and modern websites. Usi
         function switchTab(pageId, btn) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+            
             document.getElementById('btn-apps').classList.remove('active');
             document.getElementById('btn-profile').classList.remove('active');
             btn.classList.add('active');
